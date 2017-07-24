@@ -1,7 +1,7 @@
 'use strict';
 
-function Image(number) {
-  this.name = number;
+function Image(name) {
+  this.name = name;
   this.source = 'img/' + this.name + '.jpg';
   this.timesShown = 0;
   this.timesClicked = 0;
@@ -25,6 +25,8 @@ function randomImage() {
   //   alert('OMG A BABY GOAT');
   // }
   var randomIndex = Math.floor(Math.random() * Image.all.length);
+  var randomIndex2 = Math.floor(Math.random() * Image.all.length);
+  var randomIndex3 = Math.floor(Math.random() * Image.all.length);
   Image.imgEl.src = Image.all[randomIndex].source;
   Image.imgEl.alt = Image.all[randomIndex].name;
   Image.all[randomIndex].timesShown += 1;
@@ -49,8 +51,14 @@ function randomImage3() {
 
 
 document.getElementById('image1').addEventListener('click', randomImage);
+document.getElementById('image1').addEventListener('click', randomImage2);
+document.getElementById('image1').addEventListener('click', randomImage3);
 document.getElementById('image2').addEventListener('click', randomImage);
+document.getElementById('image2').addEventListener('click', randomImage2);
+document.getElementById('image2').addEventListener('click', randomImage3);
 document.getElementById('image3').addEventListener('click', randomImage);
+document.getElementById('image3').addEventListener('click', randomImage2);
+document.getElementById('image3').addEventListener('click', randomImage3);
 
 randomImage();
 randomImage2();
