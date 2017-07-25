@@ -1,11 +1,12 @@
 'use strict';
 
 
-function Image(name) {
+function Image(name, identifier) {
   this.name = name;
   this.source = 'img/' + this.name + '.jpg';
   this.timesShown = 0;
   this.timesClicked = 0;
+  this.identifier = identifier;
   Image.all.push(this);
 }
 
@@ -14,6 +15,19 @@ Image.totalClicks = 0;
 Image.allNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 
 var previouslyShown = [];
+var chartDrawn = false;
+var busChart;
+
+// Chart arrays
+var labels = [];
+var clicks = [];
+
+function updateChartArrays() {
+  for (var i = 0; i < Image.all.length; i++) {
+    labels[i] = Image.all[i].name;
+    clicks[i] = Image.all[i].timesClicked;
+  }
+}
 
 for(var i = 0; i < Image.allNames.length; i++) {
   new Image(Image.allNames[i]);
@@ -76,6 +90,7 @@ function handleClick(e) {
     if(e.target.alt === Image.all[i].name) {
       // tally a click
       Image.all[i].timesClicked += 1;
+      updateChartArrays();
     }
   }
 
@@ -89,6 +104,94 @@ function handleClick(e) {
   displayImages();
 }
 
+function tallyClick(thisImage) {
+  for (var i = 0; i < Image.all.length; i++) {
+    if (thisImage === Image.all[i].identifier) {
+      Image.all[i].clicks++;
+      updateChartArrays();
+    }
+  }
+}
+
 displayImages();
 
 Image.container.addEventListener('click', handleClick);
+
+
+
+// Chart Stuff
+
+var data = {
+  labels: labels, // titles array we declared earlier
+  datasets: [
+    {
+      data: clicks, // votes array we declared earlier
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+      ],
+      hoverBackgroundColor: [
+        'purple',
+        'purple',
+        'purple',
+        'purple',
+        'purple'
+      ]
+    }]
+};
+
+function drawChart() {
+  var ctx = document.getElementById('bus-chart').getContext('2d');
+  busChart = new Chart(ctx,{
+    type: 'bar',
+    data: data,
+    options: {
+      responsive: false,
+      animation: {
+        duration: 1000,
+        easing: 'easeOutBounce'
+      }
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          max: 20,
+          min: 0,
+          stepSize: 1.0
+        }
+      }]
+    }
+  });
+  chartDrawn = true;
+}
+
+function hideChart() {
+  document.getElementById('bus-chart').hidden = true;
+}
+
+
+
+document.getElementById('draw-chart').addEventListener('click', function(){
+  drawChart();
+  // setTimeout(hideChart, 5000);
+});
+
+
+document.getElementById('list').addEventListener('click', function(){
+  document.getElementById('list').hidden = true;
+});
+
+document.getElementById('imageContainer').addEventListener('click', function(event){
+  if(event.target.id !== 'imageContainer') {
+    tallyClick(event.target.id);
+  }
+
+
+  if (chartDrawn) {
+    busChart.update();
+  }
+});

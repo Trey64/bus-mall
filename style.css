@@ -1,3 +1,7 @@
+* {
+  border: 1px dotted green;
+}
+
 img {
   width: 300px;
   height: 300px;
