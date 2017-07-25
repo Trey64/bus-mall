@@ -10,90 +10,85 @@ function Image(name) {
 }
 
 Image.all = [];
-Image.selectionCounter = [];
+Image.totalClicks = 0;
 Image.allNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
+
+var previouslyShown = [];
 
 for(var i = 0; i < Image.allNames.length; i++) {
   new Image(Image.allNames[i]);
 }
 
+Image.leftImage = document.getElementById('left');
+Image.centerImage = document.getElementById('center');
+Image.rightImage = document.getElementById('right');
+Image.container = document.getElementById('imageContainer');
 
-Image.imgEl = document.getElementById('image1');
-Image.imgEl2 = document.getElementById('image2');
-Image.imgEl3 = document.getElementById('image3');
+function makeRandom() {
+  return Math.floor(Math.random() * Image.all.length);
+}
 
-function randomImage() {
-  var randomIndex = Math.floor(Math.random() * Image.all.length);
-  Image.imgEl.src = Image.all[randomIndex].source;
-  Image.imgEl.alt = Image.all[randomIndex].name;
-  Image.all[randomIndex].timesShown += 1;
-  console.log(Image.all[randomIndex].name + ' has been shown ' + Image.all[randomIndex].timesShown + ' times.');
-  // console.log(Image.all[randomIndex].name + ' has been clicked ' + Image.all[randomIndex].timesClicked + ' times.');
-  Image.selectionCounter.push("");
-  if (Image.selectionCounter.length === 25) {
-    Image.imgEl.removeEventListener('click', randomImage);
-    Image.imgEl.removeEventListener('click', randomImage2);
-    Image.imgEl.removeEventListener('click', randomImage3);
-    Image.imgEl2.removeEventListener('click', randomImage);
-    Image.imgEl2.removeEventListener('click', randomImage2);
-    Image.imgEl2.removeEventListener('click', randomImage3);
-    Image.imgEl3.removeEventListener('click', randomImage);
-    Image.imgEl3.removeEventListener('click', randomImage2);
-    Image.imgEl3.removeEventListener('click', randomImage3);
+function displayImages() {
+  console.log(previouslyShown, 'previously shown images');
+  // generate 3 random numbers
+  // ensure that those numbers are unique
+  var numbers = [];
+  numbers[0] = makeRandom();
+  numbers[1] = makeRandom();
+  while(numbers[0] === numbers[1]) {
+    console.log('Duplicate found');
+    numbers[1] = makeRandom();
+  }
+  numbers[2] = makeRandom();
+  while(numbers[2] === numbers[1] || numbers[2] === numbers[0]) {
+    console.log('Duplicate found');
+    numbers[2] = makeRandom();
+}
+  Image.leftImage.src = Image.all[numbers[0]].source;
+  Image.centerImage.src = Image.all[numbers[1]].source;
+  Image.rightImage.src = Image.all[numbers[2]].source;
+  Image.leftImage.alt = Image.all[numbers[0]].name;
+  Image.centerImage.alt = Image.all[numbers[1]].name;
+  Image.rightImage.alt = Image.all[numbers[2]].name;
+  Image.all[numbers[0]].timesShown += 1;
+  Image.all[numbers[1]].timesShown += 1;
+  Image.all[numbers[2]].timesShown += 1;
+  console.log(numbers, 'currently showing')
+  previouslyShown = numbers;
+}
 
-    return Image.all[randomIndex].name + ' has been shown ' + Image.all[randomIndex].timesShown + ' times.';
+function showList() {
+  var ulEl = document.getElementById('list');
+  for(var i = 0; i < Image.all.length; i++) {
+    // create element
+    var liEl = document.createElement('li');
+    // give it content
+    liEl.textContent = Image.all[i].name + ' was shown ' + Image.all[i].timesShown + ' times and was clicked ' + Image.all[i].timesClicked + ' times.';
+    // append it to DOM
+    ulEl.appendChild(liEl);
   }
 }
 
-function randomImage2() {
-  var randomIndex = Math.floor(Math.random() * Image.all.length);
-  Image.imgEl2.src = Image.all[randomIndex].source;
-  Image.imgEl2.alt = Image.all[randomIndex].name;
-  Image.all[randomIndex].timesShown += 1;
-  Image.all[randomIndex].timesClicked += 1;
-  console.log(Image.all[randomIndex].name + ' has been shown ' + Image.all[randomIndex].timesShown + ' times.');
-  console.log(Image.all[randomIndex].name + ' has been clicked ' + Image.all[randomIndex].timesClicked + ' times.');
+function handleClick(e) {
+  Image.totalClicks += 1;
+  console.log(Image.totalClicks, 'total clicks');
+  for(var i = 0; i < Image.all.length; i++) {
+    if(e.target.alt === Image.all[i].name) {
+      // tally a click
+      Image.all[i].timesClicked += 1;
+    }
+  }
 
+  if(Image.totalClicks === 3) {
+    // remove event listener
+    Image.container.removeEventListener('click', handleClick);
+    // display list of products and shows/clicks
+    return showList();
+  }
+
+  displayImages();
 }
 
-function randomImage3() {
-  var randomIndex = Math.floor(Math.random() * Image.all.length);
-  Image.imgEl3.src = Image.all[randomIndex].source;
-  Image.imgEl3.alt = Image.all[randomIndex].name;
-  Image.all[randomIndex].timesShown += 1;
-  console.log(Image.all[randomIndex].name + ' has been shown ' + Image.all[randomIndex].timesShown + ' times.');
-  console.log(Image.all[randomIndex].name + ' has been clicked ' + Image.all[randomIndex].timesClicked + ' times.');
-}
+displayImages();
 
-// if (Image.imgEl.clicked = true) {
-//   Image.imgEl.timesClicked += 1;
-//   console.log(Image.imgEl.name + ' has been clicked ' + Image.imgEl.timesClicked + ' times.');
-// }
-//
-// if (Image.imgEl2.clicked = true) {
-//   Image.timesClicked += 1;
-//   console.log(Image.name + ' has been clicked ' + Image.timesClicked + ' times.');
-// }
-//
-// if (Image.imgEl3.clicked = true) {
-//   Image.timesClicked += 1;
-//   console.log(Image.name + ' has been clicked ' + Image.timesClicked + ' times.');
-// }
-
-
-// EVENT LISTENERS
-Image.imgEl.addEventListener('click', randomImage);
-Image.imgEl.addEventListener('click', randomImage2);
-Image.imgEl.addEventListener('click', randomImage3);
-
-Image.imgEl2.addEventListener('click', randomImage);
-Image.imgEl2.addEventListener('click', randomImage2);
-Image.imgEl2.addEventListener('click', randomImage3);
-
-Image.imgEl3.addEventListener('click', randomImage);
-Image.imgEl3.addEventListener('click', randomImage2);
-Image.imgEl3.addEventListener('click', randomImage3);
-
-randomImage();
-randomImage2();
-randomImage3();
+Image.container.addEventListener('click', handleClick);
