@@ -28,9 +28,9 @@ function randomImage() {
   Image.imgEl.alt = Image.all[randomIndex].name;
   Image.all[randomIndex].timesShown += 1;
   console.log(Image.all[randomIndex].name + ' has been shown ' + Image.all[randomIndex].timesShown + ' times.');
-  console.log(Image.all[randomIndex].name + ' has been clicked ' + Image.all[randomIndex].timesClicked + ' times.');
+  // console.log(Image.all[randomIndex].name + ' has been clicked ' + Image.all[randomIndex].timesClicked + ' times.');
   Image.selectionCounter.push("");
-  if (Image.selectionCounter.length === 5) {
+  if (Image.selectionCounter.length === 25) {
     Image.imgEl.removeEventListener('click', randomImage);
     Image.imgEl.removeEventListener('click', randomImage2);
     Image.imgEl.removeEventListener('click', randomImage3);
@@ -40,6 +40,8 @@ function randomImage() {
     Image.imgEl3.removeEventListener('click', randomImage);
     Image.imgEl3.removeEventListener('click', randomImage2);
     Image.imgEl3.removeEventListener('click', randomImage3);
+
+    return Image.all[randomIndex].name + ' has been shown ' + Image.all[randomIndex].timesShown + ' times.';
   }
 }
 
@@ -48,6 +50,7 @@ function randomImage2() {
   Image.imgEl2.src = Image.all[randomIndex].source;
   Image.imgEl2.alt = Image.all[randomIndex].name;
   Image.all[randomIndex].timesShown += 1;
+  Image.all[randomIndex].timesClicked += 1;
   console.log(Image.all[randomIndex].name + ' has been shown ' + Image.all[randomIndex].timesShown + ' times.');
   console.log(Image.all[randomIndex].name + ' has been clicked ' + Image.all[randomIndex].timesClicked + ' times.');
 
@@ -61,6 +64,22 @@ function randomImage3() {
   console.log(Image.all[randomIndex].name + ' has been shown ' + Image.all[randomIndex].timesShown + ' times.');
   console.log(Image.all[randomIndex].name + ' has been clicked ' + Image.all[randomIndex].timesClicked + ' times.');
 }
+
+// if (Image.imgEl.clicked = true) {
+//   Image.imgEl.timesClicked += 1;
+//   console.log(Image.imgEl.name + ' has been clicked ' + Image.imgEl.timesClicked + ' times.');
+// }
+//
+// if (Image.imgEl2.clicked = true) {
+//   Image.timesClicked += 1;
+//   console.log(Image.name + ' has been clicked ' + Image.timesClicked + ' times.');
+// }
+//
+// if (Image.imgEl3.clicked = true) {
+//   Image.timesClicked += 1;
+//   console.log(Image.name + ' has been clicked ' + Image.timesClicked + ' times.');
+// }
+
 
 // EVENT LISTENERS
 Image.imgEl.addEventListener('click', randomImage);
@@ -78,17 +97,3 @@ Image.imgEl3.addEventListener('click', randomImage3);
 randomImage();
 randomImage2();
 randomImage3();
-
-
-// if (Image.selectionCounter.length === 3) {
-//   document.getElementById('image1').removeEventListener('click', randomImage);
-//   document.getElementById('image1').removeEventListener('click', randomImage2);
-//   document.getElementById('image1').removeEventListener('click', randomImage3);
-//   document.getElementById('image2').removeEventListener('click', randomImage);
-//   document.getElementById('image2').removeEventListener('click', randomImage2);
-//   document.getElementById('image2').removeEventListener('click', randomImage3);
-//   document.getElementById('image3').removeEventListener('click', randomImage);
-//   document.getElementById('image3').removeEventListener('click', randomImage2);
-//   document.getElementById('image3').removeEventListener('click', randomImage3);
-//
-// }
