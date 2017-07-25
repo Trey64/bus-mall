@@ -27,8 +27,20 @@ function randomImage() {
   Image.imgEl.src = Image.all[randomIndex].source;
   Image.imgEl.alt = Image.all[randomIndex].name;
   Image.all[randomIndex].timesShown += 1;
-  Image.selectionCounter.push('');
   console.log(Image.all[randomIndex].name + ' has been shown ' + Image.all[randomIndex].timesShown + ' times.');
+  console.log(Image.all[randomIndex].name + ' has been clicked ' + Image.all[randomIndex].timesClicked + ' times.');
+  Image.selectionCounter.push("");
+  if (Image.selectionCounter.length === 5) {
+    Image.imgEl.removeEventListener('click', randomImage);
+    Image.imgEl.removeEventListener('click', randomImage2);
+    Image.imgEl.removeEventListener('click', randomImage3);
+    Image.imgEl2.removeEventListener('click', randomImage);
+    Image.imgEl2.removeEventListener('click', randomImage2);
+    Image.imgEl2.removeEventListener('click', randomImage3);
+    Image.imgEl3.removeEventListener('click', randomImage);
+    Image.imgEl3.removeEventListener('click', randomImage2);
+    Image.imgEl3.removeEventListener('click', randomImage3);
+  }
 }
 
 function randomImage2() {
@@ -37,6 +49,8 @@ function randomImage2() {
   Image.imgEl2.alt = Image.all[randomIndex].name;
   Image.all[randomIndex].timesShown += 1;
   console.log(Image.all[randomIndex].name + ' has been shown ' + Image.all[randomIndex].timesShown + ' times.');
+  console.log(Image.all[randomIndex].name + ' has been clicked ' + Image.all[randomIndex].timesClicked + ' times.');
+
 }
 
 function randomImage3() {
@@ -45,31 +59,36 @@ function randomImage3() {
   Image.imgEl3.alt = Image.all[randomIndex].name;
   Image.all[randomIndex].timesShown += 1;
   console.log(Image.all[randomIndex].name + ' has been shown ' + Image.all[randomIndex].timesShown + ' times.');
+  console.log(Image.all[randomIndex].name + ' has been clicked ' + Image.all[randomIndex].timesClicked + ' times.');
 }
 
+// EVENT LISTENERS
+Image.imgEl.addEventListener('click', randomImage);
+Image.imgEl.addEventListener('click', randomImage2);
+Image.imgEl.addEventListener('click', randomImage3);
 
-document.getElementById('image1').addEventListener('click', randomImage);
-document.getElementById('image1').addEventListener('click', randomImage2);
-document.getElementById('image1').addEventListener('click', randomImage3);
-document.getElementById('image2').addEventListener('click', randomImage);
-document.getElementById('image2').addEventListener('click', randomImage2);
-document.getElementById('image2').addEventListener('click', randomImage3);
-document.getElementById('image3').addEventListener('click', randomImage);
-document.getElementById('image3').addEventListener('click', randomImage2);
-document.getElementById('image3').addEventListener('click', randomImage3);
+Image.imgEl2.addEventListener('click', randomImage);
+Image.imgEl2.addEventListener('click', randomImage2);
+Image.imgEl2.addEventListener('click', randomImage3);
+
+Image.imgEl3.addEventListener('click', randomImage);
+Image.imgEl3.addEventListener('click', randomImage2);
+Image.imgEl3.addEventListener('click', randomImage3);
 
 randomImage();
 randomImage2();
 randomImage3();
 
-if (Image.selectionCounter.length === 25) {
-  document.getElementById('image1').removeEventListener('click', randomImage);
-  document.getElementById('image1').removeEventListener('click', randomImage2);
-  document.getElementById('image1').removeEventListener('click', randomImage3);
-  document.getElementById('image2').removeEventListener('click', randomImage);
-  document.getElementById('image2').removeEventListener('click', randomImage2);
-  document.getElementById('image2').removeEventListener('click', randomImage3);
-  document.getElementById('image3').removeEventListener('click', randomImage);
-  document.getElementById('image3').removeEventListener('click', randomImage2);
-  document.getElementById('image3').removeEventListener('click', randomImage3);
-}
+
+// if (Image.selectionCounter.length === 3) {
+//   document.getElementById('image1').removeEventListener('click', randomImage);
+//   document.getElementById('image1').removeEventListener('click', randomImage2);
+//   document.getElementById('image1').removeEventListener('click', randomImage3);
+//   document.getElementById('image2').removeEventListener('click', randomImage);
+//   document.getElementById('image2').removeEventListener('click', randomImage2);
+//   document.getElementById('image2').removeEventListener('click', randomImage3);
+//   document.getElementById('image3').removeEventListener('click', randomImage);
+//   document.getElementById('image3').removeEventListener('click', randomImage2);
+//   document.getElementById('image3').removeEventListener('click', randomImage3);
+//
+// }
