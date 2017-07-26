@@ -97,7 +97,7 @@ function showList() {
     // create element
     var liEl = document.createElement('li');
     // give it content
-    liEl.textContent = Image.all[i].name + ' was shown ' + Image.all[i].timesShown + ' times and was clicked ' + Image.all[i].timesClicked + ' times.';
+    liEl.textContent = Image.all[i].name + ' was shown ' + Image.all[i].timesShown + ' times and received ' + Image.all[i].timesClicked + ' votes.';
     // append it to DOM
     ulEl.appendChild(liEl);
   }
@@ -116,7 +116,10 @@ function handleClick(e) {
 
 if(Image.totalClicks === 25) {
 // remove event listener
-  Image.container.removeEventListener('click', handleClick);
+  // Image.container.removeEventListener('click', handleClick);
+  Image.leftImage.removeEventListener('click', handleClick);
+  Image.centerImage.removeEventListener('click', handleClick);
+  Image.rightImage.removeEventListener('click', handleClick);
   // display list of products and shows/clicks
   return showList();
 }
@@ -134,7 +137,10 @@ function tallyClick(thisImage) {
 
 displayImages();
 
-Image.container.addEventListener('click', handleClick);
+// Image.container.addEventListener('click', handleClick);
+Image.leftImage.addEventListener('click', handleClick);
+Image.centerImage.addEventListener('click', handleClick);
+Image.rightImage.addEventListener('click', handleClick);
 
 
 // Chart Stuff
@@ -315,8 +321,8 @@ document.getElementById('list').addEventListener('click', function(){
   document.getElementById('list').hidden = true;
 });
 
-document.getElementById('imageContainer').addEventListener('click', function(event){
-  if(event.target.id !== 'imageContainer') {
+document.getElementById('left').addEventListener('click', function(event){
+  if(event.target.id !== 'left') {
     tallyClick(event.target.id);
   };
 
@@ -327,3 +333,42 @@ document.getElementById('imageContainer').addEventListener('click', function(eve
     pieChart.update();
   }
 });
+
+document.getElementById('center').addEventListener('click', function(event){
+  if(event.target.id !== 'center') {
+    tallyClick(event.target.id);
+  };
+
+  if (chartDrawn) {
+    busChart.update();
+  }
+  if (chartDrawn2) {
+    pieChart.update();
+  }
+});
+
+document.getElementById('right').addEventListener('click', function(event){
+  if(event.target.id !== 'right') {
+    tallyClick(event.target.id);
+  };
+
+  if (chartDrawn) {
+    busChart.update();
+  }
+  if (chartDrawn2) {
+    pieChart.update();
+  }
+});
+
+// document.getElementById('imageContainer').addEventListener('click', function(event){
+//   if(event.target.id !== 'imageContainer') {
+//     tallyClick(event.target.id);
+//   };
+//
+//   if (chartDrawn) {
+//     busChart.update();
+//   }
+//   if (chartDrawn2) {
+//     pieChart.update();
+//   }
+// });
