@@ -94,25 +94,23 @@ function handleClick(e) {
     }
   }
 
-  if(Image.totalClicks === 3) {
-    // remove event listener
-    Image.container.removeEventListener('click', handleClick);
-    // display list of products and shows/clicks
-    return showList();
-  }
+if(Image.totalClicks === 25) {
+  // remove event listener
+  Image.container.removeEventListener('click', handleClick);
+  // display list of products and shows/clicks
+  return showList();
+}
 
-  displayImages();
+displayImages();
 }
 
 function tallyClick(thisImage) {
   for (var i = 0; i < Image.all.length; i++) {
     if (thisImage === Image.all[i].identifier) {
       Image.all[i].clicks++;
-      updateChartArrays();
     }
   }
 }
-
 displayImages();
 
 Image.container.addEventListener('click', handleClick);
@@ -132,14 +130,40 @@ var data = {
         'rgba(255, 206, 86, 0.2)',
         'rgba(75, 192, 192, 0.2)',
         'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)'
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)'
+
       ],
       hoverBackgroundColor: [
-        'purple',
-        'purple',
-        'purple',
-        'purple',
-        'purple'
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558'
       ]
     }]
 };
@@ -173,13 +197,9 @@ function hideChart() {
   document.getElementById('bus-chart').hidden = true;
 }
 
-
-
 document.getElementById('draw-chart').addEventListener('click', function(){
   drawChart();
-  // setTimeout(hideChart, 5000);
 });
-
 
 document.getElementById('list').addEventListener('click', function(){
   document.getElementById('list').hidden = true;
@@ -188,8 +208,7 @@ document.getElementById('list').addEventListener('click', function(){
 document.getElementById('imageContainer').addEventListener('click', function(event){
   if(event.target.id !== 'imageContainer') {
     tallyClick(event.target.id);
-  }
-
+  };
 
   if (chartDrawn) {
     busChart.update();
