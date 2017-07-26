@@ -16,6 +16,7 @@ Image.allNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum'
 
 var previouslyShown = [];
 var chartDrawn = false;
+var chartDrawn2 = false;
 var busChart;
 var pieChart;
 
@@ -114,7 +115,7 @@ function handleClick(e) {
   }
 
 if(Image.totalClicks === 25) {
-  // remove event listener
+// remove event listener
   Image.container.removeEventListener('click', handleClick);
   // display list of products and shows/clicks
   return showList();
@@ -130,6 +131,7 @@ function tallyClick(thisImage) {
     }
   }
 }
+
 displayImages();
 
 Image.container.addEventListener('click', handleClick);
@@ -215,28 +217,6 @@ function drawChart() {
   chartDrawn = true;
 }
 
-function hideChart() {
-  document.getElementById('bus-chart').hidden = true;
-  document.getElementById('pie-chart').hidden = true;
-}
-
-document.getElementById('draw-chart').addEventListener('click', function(){
-  drawChart();
-});
-
-document.getElementById('list').addEventListener('click', function(){
-  document.getElementById('list').hidden = true;
-});
-
-document.getElementById('imageContainer').addEventListener('click', function(event){
-  if(event.target.id !== 'imageContainer') {
-    tallyClick(event.target.id);
-  };
-
-  if (chartDrawn) {
-    busChart.update();
-  }
-});
 
 // Pie chart stuff
 var data = {
@@ -268,26 +248,26 @@ var data = {
 
       ],
       hoverBackgroundColor: [
-        '#92B558',
-        '#92B558',
-        '#92B558',
-        '#92B558',
-        '#92B558',
-        '#92B558',
-        '#92B558',
-        '#92B558',
-        '#92B558',
-        '#92B558',
-        '#92B558',
-        '#92B558',
-        '#92B558',
-        '#92B558',
-        '#92B558',
-        '#92B558',
-        '#92B558',
-        '#92B558',
-        '#92B558',
-        '#92B558'
+        '#DFCFBE',
+        '#DFCFBE',
+        '#DFCFBE',
+        '#DFCFBE',
+        '#DFCFBE',
+        '#DFCFBE',
+        '#DFCFBE',
+        '#DFCFBE',
+        '#DFCFBE',
+        '#DFCFBE',
+        '#DFCFBE',
+        '#DFCFBE',
+        '#DFCFBE',
+        '#DFCFBE',
+        '#DFCFBE',
+        '#DFCFBE',
+        '#DFCFBE',
+        '#DFCFBE',
+        '#DFCFBE',
+        '#DFCFBE'
       ]
     }]
 };
@@ -314,9 +294,36 @@ function drawPieChart() {
       }]
     }
   });
-  chartDrawn = true;
+  chartDrawn2 = true;
 }
+
+
+function hideChart() {
+  document.getElementById('bus-chart').hidden = true;
+  document.getElementById('pie-chart').hidden = true;
+}
+
+document.getElementById('draw-chart').addEventListener('click', function(){
+  drawChart();
+});
 
 document.getElementById('draw-pie-chart').addEventListener('click', function(){
   drawPieChart();
+});
+
+document.getElementById('list').addEventListener('click', function(){
+  document.getElementById('list').hidden = true;
+});
+
+document.getElementById('imageContainer').addEventListener('click', function(event){
+  if(event.target.id !== 'imageContainer') {
+    tallyClick(event.target.id);
+  };
+
+  if (chartDrawn) {
+    busChart.update();
+  }
+  if (chartDrawn2) {
+    pieChart.update();
+  }
 });

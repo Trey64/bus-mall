@@ -3,8 +3,9 @@
 
  <head>
   <meta charset="UTF-8">
-  <title>BusMall - Miss your stop in style!</title>
+  <title>BusMall</title>
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Rubik|Trirong" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
  </head>
 
@@ -15,20 +16,17 @@
     <img id="left" src="" />
     <img id="center" src="" />
     <img id="right" src="" />
-    <br><br>
-    <button id="draw-chart">Click here to see a chart!</button>
-    <p>This chart displays the number of times each product was clicked!</p>
+    <br>
+    <br>
+    <button id="draw-chart">Click here for a bar chart representing the number of times a product was clicked!</button>
+    <br>
+    <button id="draw-pie-chart">Click here for a pie chart representing the number of times a product was shown!</button>
   </section>
   <ul id="list"></ul>
 
   <canvas id="bus-chart" width="1020px" height="400px"></canvas>
-
-<section id="pieContainer">
-<br><br>
-  <button id="draw-pie-chart">Click here to see a pie chart!</button>
-  <p>This chart displays the number of times each product was shown!</p>
+  <br>
   <canvas id="pie-chart" width="1020px" height="400px"></canvas>
-</section>
 
   <script src="app.js"></script>
  </body>
