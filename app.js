@@ -120,34 +120,38 @@ Image.container.addEventListener('click', handleClick);
 // Chart Stuff
 
 var data = {
-  labels: labels, // titles array we declared earlier
+  labels: labels, // labels array
   datasets: [
     {
-      data: clicks, // votes array we declared earlier
+      data: clicks, // clicks array
       backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)'
+        '#D65076',
+        '#009B77',
+        '#034F84',
+        '#DC4C46',
+        '#9E4624',
+        '#D65076',
+        '#009B77',
+        '#034F84',
+        '#DC4C46',
+        '#9E4624',
+        '#D65076',
+        '#009B77',
+        '#034F84',
+        '#DC4C46',
+        '#9E4624',
+        '#D65076',
+        '#009B77',
+        '#034F84',
+        '#DC4C46',
+        '#9E4624'
 
       ],
       hoverBackgroundColor: [
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
         '#92B558',
         '#92B558',
         '#92B558',
@@ -169,8 +173,8 @@ var data = {
 };
 
 function drawChart() {
-  var ctx = document.getElementById('bus-chart').getContext('2d');
-  busChart = new Chart(ctx,{
+  var canvasChart = document.getElementById('bus-chart').getContext('2d');
+  busChart = new Chart(canvasChart,{
     type: 'bar',
     data: data,
     options: {
