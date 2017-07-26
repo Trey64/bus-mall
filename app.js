@@ -25,6 +25,9 @@ var labels = [];
 var clicks = [];
 var shown = [];
 
+// Local Storage stuff
+var busData = [];
+
 function updateChartArrays() {
   for (var i = 0; i < Image.all.length; i++) {
     labels[i] = Image.all[i].name;
@@ -114,6 +117,30 @@ function handleClick(e) {
     }
   }
 
+
+  if(localStorage.getItem('busData') === null) {
+    console.log()
+    busData.push(Image.all);
+    var busDataStringified = JSON.stringify(busData);
+    localStorage.setItem('busDataStringified', busDataStringified);
+    var busDataStored = localStorage.getItem('busDataStringified')
+    var busDataParsed = JSON.parse(busDataStored);
+  }
+
+  // var busDataStringified = JSON.stringify(busData);
+  // localStorage.setItem('busDataStringified', busDataStringified);
+  // var busDataStored = localStorage.getItem('busDataStringified');
+  // var busDataParsed = JSON.parse(busDataStored);
+
+// if(localStorage=true) {
+//   busDataStored;
+// } else {
+//   localStorage.clear();
+//   create instances
+// }
+
+
+
 if(Image.totalClicks === 25) {
 // remove event listener
   // Image.container.removeEventListener('click', handleClick);
@@ -144,7 +171,6 @@ Image.rightImage.addEventListener('click', handleClick);
 
 
 // Chart Stuff
-
 var data = {
   labels: labels, // labels array
   datasets: [
