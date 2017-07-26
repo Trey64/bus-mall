@@ -4,6 +4,7 @@
 
 h1, h2 {
   font-family: 'Trirong', serif;
+  color: #454140;
 }
 
 body {
@@ -17,14 +18,15 @@ img {
   height: 300px;
 }
 
-p {
-
+ul {
+  list-style: none;
+  font-size: 16px;
 }
 
 button {
   font-family: 'Rubik', sans-serif;
   height: 50px;
-  font-size: 14px;
+  font-size: 16px;
   color: white;
   border-color: #004B8D;
   background-color: #88B04B;
