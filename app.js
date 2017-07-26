@@ -48,16 +48,23 @@ function displayImages() {
   // ensure that those numbers are unique
   var numbers = [];
   numbers[0] = makeRandom();
+  while(numbers[0] === previouslyShown[0] || numbers[0] === previouslyShown[1] || numbers[0] === previouslyShown[2]) {
+    console.log('Duplicate found');
+    numbers[0] = makeRandom();
+  }
+
   numbers[1] = makeRandom();
-  while(numbers[0] === numbers[1]) {
+  while(numbers[0] === numbers[1] || numbers[1] === previouslyShown[0] || numbers[1] === previouslyShown[1] || numbers[1] === previouslyShown[2]) {
     console.log('Duplicate found');
     numbers[1] = makeRandom();
   }
   numbers[2] = makeRandom();
-  while(numbers[2] === numbers[1] || numbers[2] === numbers[0]) {
+  while(numbers[2] === numbers[1] || numbers[2] === numbers[0] || numbers[2] === previouslyShown[0] || numbers[2] === previouslyShown[1] || numbers[2] === previouslyShown[2]) {
     console.log('Duplicate found');
     numbers[2] = makeRandom();
 }
+
+
   Image.leftImage.src = Image.all[numbers[0]].source;
   Image.centerImage.src = Image.all[numbers[1]].source;
   Image.rightImage.src = Image.all[numbers[2]].source;
@@ -69,7 +76,18 @@ function displayImages() {
   Image.all[numbers[2]].timesShown += 1;
   console.log(numbers, 'currently showing')
   previouslyShown = numbers;
+  // while(previouslyShown[1] === numbers[1]) {
+  //   console.log('Duplicate of previous choice');
+  //
+  // }
 }
+
+
+// if(arr.indexOf(item) == -1) {
+//    arr.push(item);
+// }
+
+
 
 function showList() {
   var ulEl = document.getElementById('list');
