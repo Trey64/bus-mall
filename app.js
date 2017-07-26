@@ -219,7 +219,7 @@ function drawChart() {
 
 
 // Pie chart stuff
-var data = {
+var data2 = {
   labels: labels, // labels array
   datasets: [
     {
@@ -276,7 +276,7 @@ function drawPieChart() {
   var ctx = document.getElementById('pie-chart').getContext('2d');
   pieChart = new Chart(ctx,{
     type: 'pie',
-    data: data,
+    data: data2,
     options: {
       responsive: false,
       animation: {
