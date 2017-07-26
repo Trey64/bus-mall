@@ -5,16 +5,31 @@
   <meta charset="UTF-8">
   <title>BusMall</title>
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Rubik|Trirong" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
  </head>
 
  <body>
-  <h1>BusMall Research Focus Group</h1>
+  <h1>BusMall Market Analysis</h1>
   <section id="imageContainer">
+    <h2>Out of the images displayed below, click the product you'd be most likely to buy</h2>
     <img id="left" src="" />
     <img id="center" src="" />
     <img id="right" src="" />
-  </section>
+    </section>
+    <br>
+    <br>
+    <button id="draw-chart">Click here for a bar chart representing the number of times a product was clicked!</button>
+    <br>
+    <br>
+    <button id="draw-pie-chart">Click here for a pie chart representing the number of times a product was shown!</button>
+
   <ul id="list"></ul>
+
+  <canvas id="bus-chart" width="1020px" height="400px"></canvas>
+  <br>
+  <br>
+  <canvas id="pie-chart" width="1020px" height="400px"></canvas>
 
   <script src="app.js"></script>
  </body>
