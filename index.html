@@ -3,24 +3,32 @@
 
  <head>
   <meta charset="UTF-8">
-  <title>BusMall</title>
+  <title>BusMall - Miss your stop in style!</title>
   <link rel="stylesheet" type="text/css" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
  </head>
 
  <body>
-  <h1>BusMall Research Focus Group</h1>
+  <h1>BusMall Market Analysis</h1>
   <section id="imageContainer">
-    <h2>Out of these options, click the product image you're most likely to buy</h2>
+    <h2>Out of the images displayed below, click the product you'd be most likely to buy</h2>
     <img id="left" src="" />
     <img id="center" src="" />
     <img id="right" src="" />
-    <p >Then...</p>
+    <br><br>
     <button id="draw-chart">Click here to see a chart!</button>
+    <p>This chart displays the number of times each product was clicked!</p>
   </section>
   <ul id="list"></ul>
 
   <canvas id="bus-chart" width="1020px" height="400px"></canvas>
+
+<section id="pieContainer">
+<br><br>
+  <button id="draw-pie-chart">Click here to see a pie chart!</button>
+  <p>This chart displays the number of times each product was shown!</p>
+  <canvas id="pie-chart" width="1020px" height="400px"></canvas>
+</section>
 
   <script src="app.js"></script>
  </body>

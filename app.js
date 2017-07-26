@@ -17,15 +17,24 @@ Image.allNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum'
 var previouslyShown = [];
 var chartDrawn = false;
 var busChart;
+var pieChart;
 
 // Chart arrays
 var labels = [];
 var clicks = [];
+var shown = [];
 
 function updateChartArrays() {
   for (var i = 0; i < Image.all.length; i++) {
     labels[i] = Image.all[i].name;
     clicks[i] = Image.all[i].timesClicked;
+  }
+}
+
+function updatePieChart() {
+  for (var i = 0; i < Image.all.length; i++) {
+    labels[i] = Image.all[i].name;
+    shown[i] = Image.all[i].timesShown;
   }
 }
 
@@ -76,18 +85,10 @@ function displayImages() {
   Image.all[numbers[2]].timesShown += 1;
   console.log(numbers, 'currently showing')
   previouslyShown = numbers;
-  // while(previouslyShown[1] === numbers[1]) {
-  //   console.log('Duplicate of previous choice');
-  //
-  // }
+  updatePieChart()
+  updatePieChart()
+  updatePieChart()
 }
-
-
-// if(arr.indexOf(item) == -1) {
-//    arr.push(item);
-// }
-
-
 
 function showList() {
   var ulEl = document.getElementById('list');
@@ -132,7 +133,6 @@ function tallyClick(thisImage) {
 displayImages();
 
 Image.container.addEventListener('click', handleClick);
-
 
 
 // Chart Stuff
@@ -191,15 +191,15 @@ var data = {
 };
 
 function drawChart() {
-  var canvasChart = document.getElementById('bus-chart').getContext('2d');
-  busChart = new Chart(canvasChart,{
+  var ctx = document.getElementById('bus-chart').getContext('2d');
+  busChart = new Chart(ctx,{
     type: 'bar',
     data: data,
     options: {
       responsive: false,
       animation: {
-        duration: 1000,
-        easing: 'easeOutBounce'
+        duration: 1500,
+        easing: 'easeInOutElastic'
       }
     },
     scales: {
@@ -217,6 +217,7 @@ function drawChart() {
 
 function hideChart() {
   document.getElementById('bus-chart').hidden = true;
+  document.getElementById('pie-chart').hidden = true;
 }
 
 document.getElementById('draw-chart').addEventListener('click', function(){
@@ -235,4 +236,87 @@ document.getElementById('imageContainer').addEventListener('click', function(eve
   if (chartDrawn) {
     busChart.update();
   }
+});
+
+// Pie chart stuff
+var data = {
+  labels: labels, // labels array
+  datasets: [
+    {
+      data: shown, // shown array
+      backgroundColor: [
+        '#D65076',
+        '#009B77',
+        '#034F84',
+        '#DC4C46',
+        '#9E4624',
+        '#D65076',
+        '#009B77',
+        '#034F84',
+        '#DC4C46',
+        '#9E4624',
+        '#D65076',
+        '#009B77',
+        '#034F84',
+        '#DC4C46',
+        '#9E4624',
+        '#D65076',
+        '#009B77',
+        '#034F84',
+        '#DC4C46',
+        '#9E4624'
+
+      ],
+      hoverBackgroundColor: [
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558',
+        '#92B558'
+      ]
+    }]
+};
+
+function drawPieChart() {
+  var ctx = document.getElementById('pie-chart').getContext('2d');
+  pieChart = new Chart(ctx,{
+    type: 'pie',
+    data: data,
+    options: {
+      responsive: false,
+      animation: {
+        duration: 1000,
+        easing: 'easeOutCirc'
+      }
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          max: 20,
+          min: 0,
+          stepSize: 1.0
+        }
+      }]
+    }
+  });
+  chartDrawn = true;
+}
+
+document.getElementById('draw-pie-chart').addEventListener('click', function(){
+  drawPieChart();
 });
