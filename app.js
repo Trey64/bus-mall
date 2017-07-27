@@ -223,17 +223,8 @@ function drawChart() {
     }
   });
   chartDrawn = true;
-  // Clears localStorage and the chart!
   document.getElementById('clear-chart').addEventListener('click', function(){
-    localStorage.clear();
     busChart.destroy();
-    pieChart.destroy();
-    document.getElementById('draw-chart').disabled = true;
-    document.getElementById('draw-pie-chart').disabled = true;
-    Image.leftImage.removeEventListener('click', handleClick);
-    Image.centerImage.removeEventListener('click', handleClick);
-    Image.rightImage.removeEventListener('click', handleClick);
-    alert('Way to go, random participant, you\'ve single-handedly cleared the opinions of everyone before you! Please refresh to start over.');
   });
 }
 
@@ -315,6 +306,9 @@ function drawPieChart() {
     }
   });
   chartDrawn2 = true;
+  document.getElementById('clear-chart').addEventListener('click', function(){
+    pieChart.destroy();
+  });
 }
 
 
@@ -329,6 +323,17 @@ document.getElementById('draw-chart').addEventListener('click', function(){
 
 document.getElementById('draw-pie-chart').addEventListener('click', function(){
   drawPieChart();
+});
+
+// Clears localStorage
+document.getElementById('clear-chart').addEventListener('click', function(){
+  localStorage.clear();
+  document.getElementById('draw-chart').disabled = true;
+  document.getElementById('draw-pie-chart').disabled = true;
+  Image.leftImage.removeEventListener('click', handleClick);
+  Image.centerImage.removeEventListener('click', handleClick);
+  Image.rightImage.removeEventListener('click', handleClick);
+  alert('Way to go, random participant, you\'ve single-handedly cleared the opinions of everyone before you! Please refresh to start over.');
 });
 
 document.getElementById('list').addEventListener('click', function(){
