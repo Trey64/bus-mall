@@ -25,9 +25,6 @@ var labels = [];
 var clicks = [];
 var shown = [];
 
-// Local Storage stuff
-// var busData = [];
-
 
 function updateChartArrays() {
   for (var i = 0; i < Image.all.length; i++) {
@@ -45,17 +42,6 @@ function updatePieChart() {
 
 for(var i = 0; i < Image.allNames.length; i++) {
   new Image(Image.allNames[i]);
-
-  // if(localStorage.length > 0) {
-  //   console.log('stuff in local storage');
-  //   var busDataStored = localStorage.getItem('busDataStringified')
-  //   var busDataParsed = JSON.parse(busDataStored);
-  //
-  // } else {
-  //   console.log('nothing in local storage');
-  //
-  // }
-
 }
 
 Image.leftImage = document.getElementById('left');
@@ -125,29 +111,15 @@ function handleClick(e) {
     if(e.target.alt === Image.all[i].name) {
       // tally a click
       Image.all[i].timesClicked += 1;
+      localStorage.busData = JSON.stringify(Image.all)
       updateChartArrays();
     }
   }
-  // busData.push(Image.all);
-  // var busDataStringified = JSON.stringify(busData);
-  // localStorage.setItem('busDataStringified', busDataStringified);
 
-
-  // if(localStorage.length > 0) {
-  //   console.log('stuff in local storage');
-  //   var busDataStored = localStorage.getItem('busDataStringified')
-  //   var busDataParsed = JSON.parse(busDataStored);
-  //
-  // } else {
-  //   console.log('nothing in local storage');
-  //
-  // }
-
-
-if(Image.totalClicks === 10) {
+if(Image.totalClicks === 25) {
 // remove event listener
   // Image.container.removeEventListener('click', handleClick);
-  localStorage.busData = JSON.stringify(Image.all)
+  // localStorage.busData = JSON.stringify(Image.all)
   Image.leftImage.removeEventListener('click', handleClick);
   Image.centerImage.removeEventListener('click', handleClick);
   Image.rightImage.removeEventListener('click', handleClick);
@@ -251,6 +223,18 @@ function drawChart() {
     }
   });
   chartDrawn = true;
+  // Clears localStorage and the chart!
+  document.getElementById('clear-chart').addEventListener('click', function(){
+    localStorage.clear();
+    busChart.destroy();
+    pieChart.destroy();
+    document.getElementById('draw-chart').disabled = true;
+    document.getElementById('draw-pie-chart').disabled = true;
+    Image.leftImage.removeEventListener('click', handleClick);
+    Image.centerImage.removeEventListener('click', handleClick);
+    Image.rightImage.removeEventListener('click', handleClick);
+    alert('Way to go, random participant, you\'ve single-handedly cleared the opinions of everyone before you! Please refresh to start over.');
+  });
 }
 
 
@@ -390,6 +374,7 @@ document.getElementById('right').addEventListener('click', function(event){
   }
 });
 
+// Local Storage
 if(localStorage.busData) {
   console.log('stuff in local storage');
   Image.all = JSON.parse(localStorage.busData);
