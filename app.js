@@ -26,7 +26,8 @@ var clicks = [];
 var shown = [];
 
 // Local Storage stuff
-var busData = [];
+// var busData = [];
+
 
 function updateChartArrays() {
   for (var i = 0; i < Image.all.length; i++) {
@@ -44,6 +45,17 @@ function updatePieChart() {
 
 for(var i = 0; i < Image.allNames.length; i++) {
   new Image(Image.allNames[i]);
+
+  // if(localStorage.length > 0) {
+  //   console.log('stuff in local storage');
+  //   var busDataStored = localStorage.getItem('busDataStringified')
+  //   var busDataParsed = JSON.parse(busDataStored);
+  //
+  // } else {
+  //   console.log('nothing in local storage');
+  //
+  // }
+
 }
 
 Image.leftImage = document.getElementById('left');
@@ -116,34 +128,26 @@ function handleClick(e) {
       updateChartArrays();
     }
   }
-
-
-  if(localStorage.getItem('busData') === null) {
-    console.log()
-    busData.push(Image.all);
-    var busDataStringified = JSON.stringify(busData);
-    localStorage.setItem('busDataStringified', busDataStringified);
-    var busDataStored = localStorage.getItem('busDataStringified')
-    var busDataParsed = JSON.parse(busDataStored);
-  }
-
+  // busData.push(Image.all);
   // var busDataStringified = JSON.stringify(busData);
   // localStorage.setItem('busDataStringified', busDataStringified);
-  // var busDataStored = localStorage.getItem('busDataStringified');
-  // var busDataParsed = JSON.parse(busDataStored);
-
-// if(localStorage=true) {
-//   busDataStored;
-// } else {
-//   localStorage.clear();
-//   create instances
-// }
 
 
+  // if(localStorage.length > 0) {
+  //   console.log('stuff in local storage');
+  //   var busDataStored = localStorage.getItem('busDataStringified')
+  //   var busDataParsed = JSON.parse(busDataStored);
+  //
+  // } else {
+  //   console.log('nothing in local storage');
+  //
+  // }
 
-if(Image.totalClicks === 25) {
+
+if(Image.totalClicks === 10) {
 // remove event listener
   // Image.container.removeEventListener('click', handleClick);
+  localStorage.busData = JSON.stringify(Image.all)
   Image.leftImage.removeEventListener('click', handleClick);
   Image.centerImage.removeEventListener('click', handleClick);
   Image.rightImage.removeEventListener('click', handleClick);
@@ -385,6 +389,13 @@ document.getElementById('right').addEventListener('click', function(event){
     pieChart.update();
   }
 });
+
+if(localStorage.busData) {
+  console.log('stuff in local storage');
+  Image.all = JSON.parse(localStorage.busData);
+} else {
+  console.log('nothing in local storage');
+}
 
 // document.getElementById('imageContainer').addEventListener('click', function(event){
 //   if(event.target.id !== 'imageContainer') {
